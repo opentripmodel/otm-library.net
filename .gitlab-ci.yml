@@ -1,0 +1,25 @@
+stages:
+  - analyze
+
+variables:
+  DOTNET_CLI_TELEMETRY_OPTOUT: "1"
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: "1"
+  SONAR_USER_HOME: "${CI_PROJECT_DIR}/.sonar" # Cache SonarQube files
+  GIT_DEPTH: "0" # Required for SonarCloud to analyze all commits properly
+
+sonarcloud_scan:
+  stage: analyze
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+  cache:
+    key: '${CI_JOB_NAME}'
+    paths:
+      - .sonar/cache # Cache SonarQube files for faster builds
+  before_script:
+    - apt-get update && apt install -y default-jre # Install Java (required by SonarScanner)
+  script:
+    - |
+      dotnet tool install --global dotnet-sonarscanner # Install SonarScanner CLI
+      export PATH="$PATH:/root/.dotnet/tools" # Ensure the tool is available in PATH
+    - dotnet sonarscanner begin /k:"zensoftwarenl_otm-library.net" /d:sonar.host.url="https://sonarcloud.io" /d:sonar.token="${SONAR_TOKEN}" /o:"zensoftwarenl"
+    - dotnet build
+    - dotnet sonarscanner end /d:sonar.login="${SONAR_TOKEN}"

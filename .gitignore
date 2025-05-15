@@ -1,0 +1,55 @@
+﻿# Build Folders
+bin/
+bin/Debug/
+obj/
+obj/Debug/
+out/
+.vs/
+
+# User-Specific Files
+*.user
+*.rsuser
+*.suo
+*.userosscache
+*.userprefs
+
+# IDE and Editor Files
+.vscode/
+.idea/
+.ionide/
+*.code-workspace
+
+# Visual Studio Specific
+.vs/
+/.vs/
+
+# Rider Specific
+*.sln.iml
+
+# Build Artifacts
+*.dll
+*.exe
+*.app
+*.so
+*.dylib
+*.pdb
+*.mdb
+*.ilk
+*.lib
+*.nupkg
+*.snk
+
+# Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet Packages
+packages/
+project.lock.json
+project.fragment.lock.json
+
+*.cache
+
+.sonarqube
