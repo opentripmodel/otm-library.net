@@ -71,5 +71,13 @@ namespace OpenTripModel.v5
         /// and consignee.
         /// </summary>
         public InlineAssociationType<Constraint> Constraint { get; set; }
+
+
+        /// <summary>
+        /// The locations that are can be identified on their own, but are also part of this 
+        /// location. For example a dock at a large distribution area. Sub-locations can also 
+        /// be seen as 'points of interest' on a larger location.
+        /// </summary>
+        public List<InlineAssociationType<Location>> SubLocations { get; set; }
     }
 }

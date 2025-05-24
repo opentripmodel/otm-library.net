@@ -3,15 +3,15 @@
     public enum ContactDetailType
     {
         Other,
+        Eori,
         Iban,
         Gln,
         VatCode,
         Name,
         LastName,
-        MiddleName,
         FirstName,
         Email,
-        Phone,
-        MobilePhone
+        MobilePhone,
+        Phone
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace OpenTripModel.v5
 {
@@ -27,5 +28,11 @@ namespace OpenTripModel.v5
         public System.String DangerNumber { get; set; }
 
         public System.String TunnelCode { get; set; }
+
+        public System.String SpecialProvisions { get; set; }
+
+        public Nullable<System.Int32> Points { get; set; }
+
+        public Nullable<TransportCategory> TransportCategory { get; set; }
     }
 }

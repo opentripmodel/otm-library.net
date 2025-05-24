@@ -67,5 +67,42 @@ namespace OpenTripModel.v5
         /// The constraints this action abides to, such as start and end time windows.
         /// </summary>
         public List<InlineAssociationType<Constraint>> Constraint { get; set; }
+
+
+        /// <summary>
+        /// The result of the action, can only be present in the actual or realized 
+        /// lifecycles. The result has a required status and optional additional info, 
+        /// like a remark and reason (in the case of failure).
+        /// </summary>
+        public List<ActionResult> Result { get; set; }
+
+
+        /// <summary>
+        /// The sequence number of this action within the entity it is taking place. 
+        /// Can be used to indicate order when no times are present
+        /// </summary>
+        public Nullable<System.Int32> SequenceNr { get; set; }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public TimeFormat TimeFormat { get; set; }
+
+
+
+        /// <summary>
+        /// The recurrence of the date time, should only be set when timeFormat is set 
+        /// to recurringDateTime. The recurrence follows the Recurrence Rule specification
+        /// </summary>
+        public System.String Recurrence { get; set; }
+
+
+
+        /// <summary>
+        /// The duration of this action/event, should only be set when timeFormat is set
+        /// to duration. The duration follows the ISO 8601 specification
+        /// </summary>
+        public System.String Duration { get; set; }
     }
 }

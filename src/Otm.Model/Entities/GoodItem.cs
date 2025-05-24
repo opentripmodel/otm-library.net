@@ -35,7 +35,14 @@ namespace OpenTripModel.v5
         /// </summary>
         public System.Double Quantity { get; set; }
 
-        
+
+        /// <summary>
+        /// The gross weight of a 'single' good, the total weight can be calculated 
+        /// by using the quantity and multiplying it with this weight.
+        /// </summary>
+        public UnitWithValue GrossWeight { get; set; }
+
+
         /// <summary>
         /// The weight of a 'single' good, the total weight can be calculated by using 
         /// the quantity and multiplying it with the weight.
@@ -77,6 +84,15 @@ namespace OpenTripModel.v5
         /// Description of the package type f.e. pallet, europallet, drum, carton etc.
         /// </summary>
         public System.String PackagingMaterial { get; set; }
+
+
+        /// <summary>
+        /// Product classification information often required at customs. A single product 
+        /// can contain multiple classification lines. For example whenever the product 
+        /// consists of multiple components that can each be classified. The most important 
+        /// information in the classification lines is often the HS code.
+        /// </summary>
+        public List<ClassificationLine> ClassificationLines { get; set; }
 
 
         /// <summary>

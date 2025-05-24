@@ -65,5 +65,21 @@ namespace OpenTripModel.v5
         /// and consignee.
         /// </summary>
         public InlineAssociationType<Constraint> Constraint { get; set; }
+
+
+        /// <summary>
+        /// The transport order this consignment belongs to.
+        /// </summary>
+        public InlineAssociationType<TransportOrder> TransportOrder { get; set; }
+
+
+
+        /// <summary>
+        /// Consignments that have replaced the current consignment. Because of various reasons a 
+        /// consignment can be cancelled and replaced by one or more other consignments. An example 
+        /// is that the consignment is too large to be transported as a single 'transportable unit'. 
+        /// You can use the relation field in the association to indicate the type of relationship.
+        /// </summary>
+        public List<InlineAssociationType<Consignment>> RelatedConsignments { get; set; }
     }
 }

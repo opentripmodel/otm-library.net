@@ -4,5 +4,7 @@
         : OtmEntity
     {
         public ConstraintValueBase Value { get; set; }
+
+        public Enforceability Enforceability { get; set; } = Enforceability.Enforced;
     }
 }

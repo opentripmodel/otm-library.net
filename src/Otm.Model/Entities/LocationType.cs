@@ -6,6 +6,7 @@
         Store,
         EnvironmentalZone,
         RestrictedArea,
-        Customer
+        Customer,
+        OperationalBase
     }
 }
