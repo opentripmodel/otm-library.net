@@ -67,8 +67,8 @@ jobs:
         run:  |
               for pkg in ${{ env.NUGET_OUTPUT }}/*.nupkg; do
                 dotnet nuget push "$pkg" \
-                  --source https://nuget.pkg.github.com/opentripmodel/index.json \
-                  --api-key ${{ secrets.GITHUB_TOKEN }} \
+                  --source https://api.nuget.org/v3/index.json \
+                  --api-key ${{ secrets.NUGET_APIKEY }} \
                   --skip-duplicate
               done
               
