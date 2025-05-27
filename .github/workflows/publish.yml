@@ -49,7 +49,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs:   build_pack
-    if:      github.event_name == 'release'  # only run on GitHub “Release” events (which are triggered via the UI)
+    # if:      github.event_name == 'release'  # only run on GitHub “Release” events (which are triggered via the UI)
 
     steps:
       - name: Download Package Artifact
