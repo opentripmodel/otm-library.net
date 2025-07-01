@@ -13,8 +13,8 @@ permissions:
 on:
   workflow_dispatch: # Allow running the workflow manually from the GitHub UI
   push:
-    branches:
-      - main # build & pack on every push to main
+#    branches:
+#      - main # build & pack on every push to main
 
 
 jobs:
