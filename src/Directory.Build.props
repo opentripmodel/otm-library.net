@@ -7,4 +7,18 @@
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
     </PropertyGroup>
+
+    <!-- NuGet Gallery Naming Conventions for OpenTripModel -->
+    <PropertyGroup>
+        <PackageId Condition="'$(MSBuildProjectName)' == 'Otm.Model'">
+            OpenTripModel.Model
+        </PackageId>
+        <PackageId Condition="'$(MSBuildProjectName)' == 'Otm.Profile'">
+            OpenTripModel.Profile
+        </PackageId>
+        <PackageId Condition="'$(MSBuildProjectName)' == 'Otm.Serializer'">
+            OpenTripModel.Serializer
+        </PackageId>
+    </PropertyGroup>
+
 </Project>
