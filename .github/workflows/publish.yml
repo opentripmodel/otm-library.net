@@ -63,12 +63,11 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Publish to GitHub Packages
+      - name: Publish to NuGet Gallery
         run:  |
               for pkg in ${{ env.NUGET_OUTPUT }}/*.nupkg; do
                 dotnet nuget push "$pkg" \
                   --source https://api.nuget.org/v3/index.json \
-                  --api-key ${{ secrets.NUGET_APIKEY }} \
-                  --skip-duplicate
+                  --api-key ${{ secrets.NUGET_APIKEY }}
               done
               
