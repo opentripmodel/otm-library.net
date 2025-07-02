@@ -21,4 +21,9 @@
         </PackageId>
     </PropertyGroup>
 
+    <!-- Semantic Versioning -->
+    <ItemGroup>
+        <PackageReference Include="GitVersion.MsBuild" Version="6.3.0" PrivateAssets="All"/>
+    </ItemGroup>
+
 </Project>
