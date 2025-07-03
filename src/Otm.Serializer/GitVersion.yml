@@ -1,0 +1,19 @@
+
+next-version: 0.1.1
+
+tag-prefix: 'Serializer/v'
+
+branches:
+  main:
+    increment: Patch # every merge to main bumps the patch (…-alpha.N)
+    regex: ^main$
+
+  release:
+    increment: Minor  # release/1.4 → bumps minor to X.Y.0-rc.N
+    regex: ^release/.*$
+
+  feature:
+    increment: None # keep base version; GitVersion appends branch label
+    regex: ^feature/.*$
+
+

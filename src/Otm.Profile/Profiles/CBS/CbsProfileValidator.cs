@@ -11,6 +11,7 @@ namespace OpenTripModel.Profiles.CBS
     {
         public ValidationResult Validate(OpenTripModel.v5.Trip trip)
         {
+            // single package release test
             return ValidationResult.Success();
         }
     }

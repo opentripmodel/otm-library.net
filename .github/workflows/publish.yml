@@ -38,8 +38,13 @@ jobs:
               echo "Listing .github/scripts:"
               ls -al .github/workflows || true
 
+      #- name: Run GitVersion
+      #  uses: GitTools/actions/gitversion@v0.9
+      #  id: gitversion
 
-      # Decide if we’re on a tag build or a branch build
+
+
+    # Decide if we’re on a tag build(stable version) or a branch build (prerelease)
       - name: Determine build scope
         id:   meta
         run:  bash .github/workflows/scripts/determine-scope.sh "$GITHUB_REF"
@@ -51,7 +56,17 @@ jobs:
               echo "Project = ${{ steps.meta.outputs.project }}"
               echo "Version = ${{ steps.meta.outputs.version }}"
 
-      #
+
+      - name: Build & Pack
+        run:  |
+              mkdir -p "$NUGET_OUTPUT"
+              bash .github/scripts/build-and-pack.sh \
+                "${{ steps.meta.outputs.scope }}"   \
+                "${{ steps.meta.outputs.project }}" \
+                "${{ steps.meta.outputs.version }}" \
+                "$NUGET_OUTPUT"
+
+
       #- name: Pack libraries
       #  shell: bash
       #  run: |
