@@ -29,5 +29,6 @@ namespace OpenTripModel.v5
     }
 
     //  dotnet affected: model
+    //
 
 }
