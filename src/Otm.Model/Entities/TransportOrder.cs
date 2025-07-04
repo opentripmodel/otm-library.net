@@ -27,4 +27,6 @@ namespace OpenTripModel.v5
         /// </summary>
         public List<InlineAssociationType<Constraint>> Constraints { get; set; }
     }
+
+    // test dotnet affected: model
 }

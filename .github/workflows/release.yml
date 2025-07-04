@@ -1,0 +1,66 @@
+name: Release Pipeline (Build PRs)
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
+  DOTNET_NOLOGO:                     true
+  NUGET_OUTPUT:                      ${{ github.workspace }}/nuget
+
+permissions:
+  contents: read
+  packages: write
+
+on:
+  workflow_dispatch: # Allow running the workflow manually from the GitHub UI
+  push:
+    #tags: ['Model/v*', 'Profile/v*', 'Serializer/*']
+
+#    branches:
+#      - main # build & pack on every push to main
+
+
+jobs:
+  build_pack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+
+
+      - name: Install dotnet-affected tool
+        run:  dotnet tool install --global dotnet-affected
+
+
+      - name: Create tool manifest
+        run:  |
+              dotnet new tool-manifest --force
+              dotnet tool install dotnet-affected
+
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run:  echo "$GITHUB_CONTEXT"
+
+
+      - name: Determine build scope
+        uses: leonardochaia/dotnet-affected-action@v1
+        id: dotnet_affected
+        with:
+          from: ${{ github.head_ref }}
+          to:   ${{ github.base_ref }}
+
+
+      # 🔍 DEBUG STEP - Log all outputs
+      - name: Dump dotnet-affected outputs
+        env:
+          OUTPUTS: ${{ toJson(steps.dotnet_affected.outputs) }}
+        run: echo "$OUTPUTS"
+
+
