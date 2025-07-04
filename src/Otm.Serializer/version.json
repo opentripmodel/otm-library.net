@@ -4,5 +4,9 @@
     "version": "0.3-alpha.{height}",
     "pathFilters": [
         "."
-    ]
+    ],
+    "release": {
+        "branchName": "release/Serializer/v{version}",
+        "tagName": "Serializer/v{version}"
+    }
 }

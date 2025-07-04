@@ -4,5 +4,9 @@
     "version": "0.2-alpha.{height}",
     "pathFilters": [
         "."
-    ]
+    ],
+    "release": {
+        "branchName": "release/Model/v{version}",
+        "tagName": "Model/v{version}"
+    }
 }
