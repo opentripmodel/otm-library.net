@@ -53,7 +53,8 @@ jobs:
         uses: leonardochaia/dotnet-affected-action@v1
         id: dotnet_affected
         with:
-          from: ${{ github.event.before }}
+          #from: ${{ github.event.before }}
+          from: 'c4ac74acdfc24bcdf7aa9c444acf4554e49de5ec'
           to:   ${{ github.event.after }}
 
 
