@@ -4,7 +4,6 @@
     <Authors>FiLogic B.V.</Authors>
     <Company>Stichting Uniforme Transport Code</Company>
     <Description>OTM Toolkit - A cross-framework .NET library</Description>
-    <PackageId>Otm.Profile</PackageId>
     <Title>OTM Toolkit</Title>
   </PropertyGroup>
   <ItemGroup>
