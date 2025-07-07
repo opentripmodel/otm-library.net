@@ -4,15 +4,17 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO:                     true
   NUGET_OUTPUT:                      ${{ github.workspace }}/nuget
+  NUGET_APIKEY:                      ${{ secrets.NUGET_APIKEY }} # Access to NuGet Gallery
+  #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 on:
   workflow_dispatch: # Allow running the workflow manually from the GitHub UI
   push:
-    #tags: ['Model/v*', 'Profile/v*', 'Serializer/*']
+  #tags: ['Model/v*', 'Profile/v*', 'Serializer/*']
 
 #    branches:
 #      - main # build & pack on every push to main
@@ -51,7 +53,7 @@ jobs:
 
       - name: Determine build scope
         uses: leonardochaia/dotnet-affected-action@v1
-        id: dotnet_affected
+        id:   dotnet_affected
         with:
           #from: ${{ github.event.before }}
           from: 'c4ac74acdfc24bcdf7aa9c444acf4554e49de5ec'
@@ -62,6 +64,28 @@ jobs:
       - name: Dump dotnet-affected outputs
         env:
           OUTPUTS: ${{ toJson(steps.dotnet_affected.outputs) }}
-        run: echo "$OUTPUTS"
+        run:  echo "$OUTPUTS"
 
+
+      - name: Debug – list workspace
+        run:  |
+              echo "📂 Repo root is $PWD"
+              ls -alh
+              echo
+              echo "🔍 Top-level tree (two levels deep)"
+              sudo apt-get -qq update && sudo apt-get -qq install tree   # optional
+              tree -a -L 3 || true
+              
+              echo
+              echo "🧬 Environment snapshot"
+              printenv | sort
+
+
+      - name: Process affected projects
+        if:   steps.dotnet_affected.outputs.affected != ''
+        env:
+          AFFECTED: ${{ steps.dotnet_affected.outputs.affected }}
+        run:  |
+              printf '%s' "$AFFECTED" | sed '/^$/d' > affected.txt
+              .github/workflows/scripts/process_affected.sh affected.txt
 
