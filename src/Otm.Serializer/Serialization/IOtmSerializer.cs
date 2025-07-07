@@ -51,4 +51,3 @@ namespace OpenTripModel.Serialization
 
 
 // test
-//
