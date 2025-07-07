@@ -49,6 +49,8 @@ for pkg in "${PKGS[@]}"; do
     --api-key "$API_KEY" \
     --source "$SOURCE_URL"
 
+  # Cleanup output dir for (optional) next run
+  rm -f -- "$pkg"
 done
 
 echo "✅  Release v$VERSION completed successfully!"
