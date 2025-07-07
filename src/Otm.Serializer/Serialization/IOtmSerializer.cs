@@ -48,3 +48,6 @@ namespace OpenTripModel.Serialization
         T DeserializeFromStream<T>(Stream inputStream);
     }
 }
+
+
+// test
