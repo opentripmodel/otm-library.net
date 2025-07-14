@@ -24,7 +24,7 @@
             "@semantic-release/exec",
             {
                 "verifyConditionsCmd": "echo $CSPROJ",
-                "publishCmd": "../../.github/workflows/scripts/release.sh $CSPROJ ${nextRelease.version}"
+                "publishCmd": "../../.github/workflows/scripts/release.sh $CSPROJ ${nextRelease.gitTag}"
             }
         ]
     ]
