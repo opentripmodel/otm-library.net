@@ -38,7 +38,7 @@ EOF
 
 
   # 3. Run semantic-release
-  CSPROJ="$proj_file" npx semantic-release --no-ci
+  CSPROJ="$proj_file" npx semantic-release --no-ci --dry-run
 
   ###
 
