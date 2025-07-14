@@ -23,7 +23,7 @@
         [
             "@semantic-release/exec",
             {
-                "verifyConditionsCmd": "echo $CSPROJ",
+                "verifyConditionsCmd": "echo $CSPROJ ${JSON.stringify(branch.tags)}",
                 "verifyReleaseCmd": "echo \"📦  version: ${branch.tags[branch.tags.length - 1].version}\"",
                 "publishCmd": "../../.github/workflows/scripts/release.sh $CSPROJ ${nextRelease.gitTag}"
             }
