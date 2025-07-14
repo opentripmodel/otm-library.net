@@ -25,6 +25,7 @@
             {
                 "verifyConditionsCmd": "echo $CSPROJ ${JSON.stringify(branch.tags)}",
                 "verifyReleaseCmd": "echo \"📦  version: ${branch.tags[branch.tags.length - 1].version}\"",
+                "analyzeCommitsCmd": "echo $CSPROJ ${JSON.stringify(commits)}",
                 "publishCmd": "../../.github/workflows/scripts/release.sh $CSPROJ ${nextRelease.gitTag}"
             }
         ]
