@@ -24,7 +24,7 @@
             "@semantic-release/exec",
             {
                 "verifyConditionsCmd": "echo $CSPROJ",
-                "verifyReleaseCmd": "echo \"📦  tags: ${branch.tags.join(', ')}\"",
+                "verifyReleaseCmd": "echo \"📦  tags: ${JSON.stringify(branch.tags)}\"",
                 "publishCmd": "../../.github/workflows/scripts/release.sh $CSPROJ ${nextRelease.gitTag}"
             }
         ]
