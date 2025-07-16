@@ -5,7 +5,7 @@
 
 This document describes the release process for the OTM Library .NET monorepo. 
 
-The process is inspired by Maven's release workflow and consists of two main steps: **prepare** and **perform**.
+The process is inspired by Maven's release workflow and consists of three main steps: **create release branch**, **prepare**, and **perform**.
 
 ## 🔧 Prerequisites
 
@@ -15,9 +15,30 @@ The process is inspired by Maven's release workflow and consists of two main ste
 dotnet tool install -g dotnet-script
 ```
 
+## 🔧 Release Branch Strategy
+All releases must be done from dedicated release branches following the naming pattern:
+
+release-{ProjectName}@{Version}
+
+Examples:
+
+`release-Profile@1.2.3.4`
+
+`release-Model@1.2.3.5`
+
+`release-Serializer@1.2.3.6`
+
 ## 🔧 Release Commands
 
-### 1. Prepare Release
+### 1. Create Release Branch
+
+Create a release branch following the naming pattern:
+
+```shell
+git checkout -b release-Profile@1.2.3.4
+```
+
+### 2. Prepare Release
 
 Run the release preparation script for each project you want to release:
 
@@ -33,7 +54,7 @@ dotnet script release-prepare.csx --project ./src/Otm.Serializer/Otm.Serializer.
 - **Creates Tag**: Creates annotated git tag (e.g., `Profile@1.2.3.4`)
 - **Commit 2**: Bumps to next development version (e.g., `1.2.3.5-SNAPSHOT`)
 
-### 2. Push Changes
+### 3. Push Changes
 
 Push the commits and tags to remote repository:
 
@@ -45,16 +66,14 @@ git push --follow-tags
 - Pushes both release commits to remote
 - Pushes annotated tags to remote
 
-## 🔧 Example Workflow
+### 4. Create Pull Request
 
-```shell
-# 1. Prepare releases for multiple projects
-dotnet script release-prepare.csx --project ./src/Otm.Profile/Otm.Profile.csproj
-dotnet script release-prepare.csx --project ./src/Otm.Model/Otm.Model.csproj
+Create a Pull Request to merge the release branch into main.
 
-# 2. Push everything
-git push --follow-tags
-```
+**What this does:**
+- 🤖 Triggers automated CI pipeline
+- 📦 Builds, packs, and publishes to NuGet Gallery
+
 
 ## 🔧 What Happens in CI
 
@@ -64,7 +83,7 @@ When Pull Request from release branch is created, the CI pipeline automatically:
 3. Packs NuGet packages
 4. Publishes to NuGet Gallery
 
-## 🔧 Tag Format
+## 🏷️ Tag Format
 
 Tags follow the pattern: `{ProjectName}@{Version}`
 
