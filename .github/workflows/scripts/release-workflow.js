@@ -27,6 +27,7 @@ async function latestTag (options = {}) {
 
     if (!out[0]) throw new Error(`No tags matching ${options.prefix}`);
 
+
     // console.log(`✅ ${options.prefix} - found git tags:\n ${out}`);
 
     // return latest SemVer
