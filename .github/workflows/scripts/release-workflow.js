@@ -1,4 +1,4 @@
-const { execSync, execFile } = require('node:child_process');
+const { execSync, execFile, spawn } = require('node:child_process');
 const { readFile, readdir } = require('node:fs/promises');
 const { resolve, extname, basename } = require('node:path');
 const { promisify } = require('node:util');
@@ -110,7 +110,16 @@ function getTagPrefix(csprojPath) {
 async function runReleaseScript(csprojPath, versionToRelease) {
     const shellScript = resolve(__dirname, './release.sh')
 
-    await execFileAsync(shellScript, [csprojPath, versionToRelease], { stdio: 'inherit' });
+    console.log(`Running: ${shellScript} ${csprojPath} ${versionToRelease}`);
+
+    try {
+        const { stdout, stderr } = await execFileAsync(shellScript, [csprojPath, versionToRelease]);
+        console.log('STDOUT:', stdout);
+        console.log('STDERR:', stderr);
+    } catch (error) {
+        console.error('Script failed:', error);
+        throw error;
+    }
 }
 
 

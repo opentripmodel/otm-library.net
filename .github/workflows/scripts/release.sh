@@ -43,14 +43,14 @@ if [ ${#PKGS[@]} -eq 0 ]; then
   exit 1
 fi
 
-for pkg in "${PKGS[@]}"; do
-  echo "    → $(basename "$pkg")"
-  dotnet nuget push "$pkg" \
-    --api-key "$API_KEY" \
-    --source "$SOURCE_URL"
-
-  # Cleanup output dir for (optional) next run
-  rm -f -- "$pkg"
-done
+#for pkg in "${PKGS[@]}"; do
+#  echo "    → $(basename "$pkg")"
+#  dotnet nuget push "$pkg" \
+#    --api-key "$API_KEY" \
+#    --source "$SOURCE_URL"
+#
+#  # Cleanup output dir for (optional) next run
+#  rm -f -- "$pkg"
+#done
 
 echo "✅  Release v$VERSION completed successfully!"
