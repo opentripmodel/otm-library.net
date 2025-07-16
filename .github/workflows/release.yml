@@ -14,6 +14,8 @@ permissions:
 on:
   workflow_dispatch: # Allow running the workflow manually from the GitHub UI
   push: # Run on every push to any branch
+    branches: [ '**' ]  # All branches
+    tags-ignore: [ '**' ]  # But no tags
   #pull_request:
   #  types: [ opened ]
   #  branches: [ main ]
