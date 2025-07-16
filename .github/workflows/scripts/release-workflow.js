@@ -15,11 +15,11 @@ async function latestTag (options = {}) {
     if (!options.prefix) throw new Error("Prefix is required.");
 
     // const cmd = `git tag --merged HEAD --list '${options.prefix}@*'  --sort=-v:refname`;
-    const cmdList = `git tag -l`
-
-    const outList = execSync(cmdList, {encoding: 'utf8'}).trim().split('\n');
-
-    console.log('🏷️ Found git tags:', outList)
+    // const cmdList = `git tag -l`
+    //
+    // const outList = execSync(cmdList, {encoding: 'utf8'}).trim().split('\n');
+    //
+    // console.log('🏷️ Found git tags:', outList)
 
     const cmd = `git describe --tags --match="${options.prefix}@*" --abbrev=0`
 
