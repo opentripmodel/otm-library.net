@@ -13,7 +13,7 @@ var projectFileContent = File.ReadAllText(projectPath);
 var newContent = projectFileContent.Replace("-SNAPSHOT", "");
 File.WriteAllText(projectPath, newContent);
 
-var match = Regex.Match(newContent, @"<PackageVersion>(.*?)</PackageVersion>");
+var match = Regex.Match(newContent, @"<ReleaseVersion>(.*?)</ReleaseVersion>");
 
 if (match.Success)
 {

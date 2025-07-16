@@ -15,6 +15,12 @@ async function latestTag (options = {}) {
     if (!options.prefix) throw new Error("Prefix is required.");
 
     // const cmd = `git tag --merged HEAD --list '${options.prefix}@*'  --sort=-v:refname`;
+    const cmdList = `git tag -l`
+
+    const outList = execSync(cmdList, {encoding: 'utf8'}).trim().split('\n');
+
+    console.log('🏷️ Found git tags:', outList)
+
     const cmd = `git describe --tags --match="${options.prefix}@*" --abbrev=0`
 
     const out = execSync(cmd, {encoding: 'utf8'}).trim().split('\n');
@@ -33,12 +39,12 @@ async function readLatestReleaseVersion(csProjectFilePath) {
 
     // console.log(stringXml);
 
-    const match = stringXml.match(/<PackageVersion>\s*([^<]+)\s*<\/PackageVersion>/);
+    const match = stringXml.match(/<ReleaseVersion>\s*([^<]+)\s*<\/ReleaseVersion>/);
 
     // console.log('match:', match[1]);
 
 
-    if (!match) throw new Error(`PackageVersion not found in ${csProjectFilePath}`);
+    if (!match) throw new Error(`ReleaseVersion not found in ${csProjectFilePath}`);
 
     return match[1].trim();
 
