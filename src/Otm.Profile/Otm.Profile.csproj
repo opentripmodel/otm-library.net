@@ -1,11 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
     <Authors>FiLogic B.V.</Authors>
     <Company>Stichting Uniforme Transport Code</Company>
     <Description>OTM Toolkit - A cross-framework .NET library</Description>
     <Title>OTM Toolkit</Title>
-    <ReleaseVersion>1.1.1.5-SNAPSHOT</ReleaseVersion>
+    <ReleaseVersion>1.1.1.7</ReleaseVersion>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Otm.Model\Otm.Model.csproj" />
