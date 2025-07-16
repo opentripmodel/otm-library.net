@@ -3,7 +3,7 @@
 
 ## Overview
 
-This document describes the release process for the OTM Library .NET monorepo. 
+This document describes the release process for the OTM Library .NET monorepo.
 
 The process is inspired by Maven's release workflow and consists of three main steps: **create release branch**, **prepare**, and **perform**.
 
@@ -40,12 +40,10 @@ git checkout -b release-Profile@1.2.3.4
 
 ### 2. Prepare Release
 
-Run the release preparation script for each project you want to release:
+Run the release preparation script for the project that you want to release:
 
 ```shell
 dotnet script release-prepare.csx --project ./src/Otm.Profile/Otm.Profile.csproj
-dotnet script release-prepare.csx --project ./src/Otm.Model/Otm.Model.csproj
-dotnet script release-prepare.csx --project ./src/Otm.Serializer/Otm.Serializer.csproj
 ```
 
 **What this does:**
@@ -59,7 +57,7 @@ dotnet script release-prepare.csx --project ./src/Otm.Serializer/Otm.Serializer.
 Push the commits and tags to remote repository:
 
 ```shell
-git push --follow-tags
+git push -u origin HEAD --follow-tags
 ```
 
 **What this does:**
@@ -74,16 +72,6 @@ Create a Pull Request to merge the release branch into main.
 - 🤖 Triggers automated CI pipeline
 - 📦 Builds, packs, and publishes to NuGet Gallery
 
-## 🔧 Example Workflow
-
-```shell
-# 1. Prepare releases for multiple projects
-dotnet script release-prepare.csx --project ./src/Otm.Profile/Otm.Profile.csproj
-dotnet script release-prepare.csx --project ./src/Otm.Model/Otm.Model.csproj
-
-# 2. Push everything
-git push --follow-tags
-```
 
 ## 🔧 What Happens in CI
 
