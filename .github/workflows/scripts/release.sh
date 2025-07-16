@@ -26,7 +26,7 @@ SOURCE_URL="${NUGET_SOURCE_URL:-https://api.nuget.org/v3/index.json}"
 mkdir -p "$NUGET_OUTPUT"
 
 echo "🔨  Building project (v$VERSION)…"
-dotnet build "$CSPROJ" -c Release --nologo
+dotnet build "$CSPROJ" -c Release --nologo --verbosity minimal
 
 echo "📦  Packing project…"
 dotnet pack "$CSPROJ" \

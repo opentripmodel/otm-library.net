@@ -29,7 +29,7 @@ if (match.Success)
 
     var tagName = $"{shortName}@{version}";
 
-    Process.Start("git", $"tag {tagName}").WaitForExit();
+    Process.Start("git", $"tag -a {tagName} -m \"Release {projectName} {version}\"").WaitForExit();
 
     Console.WriteLine($"✅ Created tag: {tagName}");
 
