@@ -3,10 +3,10 @@
     <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
     <Authors>FiLogic B.V.</Authors>
     <Company>Stichting Uniforme Transport Code</Company>
-    <Version>1.0.0</Version>
     <Description>OTM Toolkit - A cross-framework .NET library</Description>
     <PackageId>Otm.Profile</PackageId>
     <Title>OTM Toolkit</Title>
+    <ReleaseVersion>1.1.1.2-SNAPSHOT</ReleaseVersion>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.Text.Json" Version="9.0.5" />

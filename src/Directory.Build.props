@@ -1,6 +1,5 @@
 <Project>
     <PropertyGroup>
-        <Version>1.0.1</Version>
         <Company>S.U.T.C</Company>
         <Authors>FiLogic B.V.</Authors>
         <RepositoryUrl>https://github.com/opentripmodel/OTM-library.NET</RepositoryUrl>

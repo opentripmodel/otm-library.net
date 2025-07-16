@@ -1,25 +1,29 @@
-name: OTM Package Pipeline
+name: Release Pipeline (Build PRs)
 
-# shared env for all jobs
 env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO:                     true
   NUGET_OUTPUT:                      ${{ github.workspace }}/nuget
+  NUGET_APIKEY:                      ${{ secrets.NUGET_APIKEY }} # Access to NuGet Gallery
+  #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 permissions:
-  contents: read
+  contents: write
   packages: write
 
 on:
   workflow_dispatch: # Allow running the workflow manually from the GitHub UI
-  push:
-#    branches:
-#      - main # build & pack on every push to main
-
+  #push: # Run on every push to any branch
+  #  branches: [ '**' ]  # All branches
+  #  tags-ignore: [ '**' ]  # But no tags
+  pull_request:
+    types: [ opened ]
+    branches: [ main ]
 
 jobs:
-  build_pack:
+  build_pack_publish:
     runs-on: ubuntu-latest
+    #if: startsWith(github.head_ref, 'release-') || github.event_name == 'workflow_dispatch' # Run only on release branch or manual run
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -31,44 +35,10 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Restore & Build
-        run:  |
-              dotnet build src/Otm.Model/Otm.Model.csproj -c Release
-
-      - name: Pack
-        run:  |
-              dotnet pack src/Otm.Model/Otm.Model.csproj -c Release -o ${{ env.NUGET_OUTPUT }}
-
-      - name: Upload Package Artifact
-        uses: actions/upload-artifact@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          name: nuget
-          path: ${{ env.NUGET_OUTPUT }}/*.nupkg
+          node-version: '20'
 
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs:   build_pack
-    # if:      github.event_name == 'release'  # only run on GitHub “Release” events (which are triggered via the UI)
-
-    steps:
-      - name: Download Package Artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: nuget
-          path: ${{ env.NUGET_OUTPUT }}
-
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Publish to GitHub Packages
-        run:  |
-              for pkg in ${{ env.NUGET_OUTPUT }}/*.nupkg; do
-                dotnet nuget push "$pkg" \
-                  --source https://api.nuget.org/v3/index.json \
-                  --api-key ${{ secrets.NUGET_APIKEY }} \
-                  --skip-duplicate
-              done
-              
+      - name: Run Pack & Publish Script
+        run:  node .github/workflows/scripts/release-workflow.js
