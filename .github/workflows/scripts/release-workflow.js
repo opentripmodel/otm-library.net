@@ -14,7 +14,8 @@ const execFileAsync = promisify(execFile);
 async function latestTag (options = {}) {
     if (!options.prefix) throw new Error("Prefix is required.");
 
-    const cmd = `git tag --merged HEAD --list '${options.prefix}@*'  --sort=-v:refname`;
+    // const cmd = `git tag --merged HEAD --list '${options.prefix}@*'  --sort=-v:refname`;
+    const cmd = `git describe --tags --match="${options.prefix}@*" --abbrev=0`
 
     const out = execSync(cmd, {encoding: 'utf8'}).trim().split('\n');
 
@@ -150,6 +151,8 @@ if (require.main === module) {
                     // console.log(`Project ${tagPrefix} - found release version:  ${latestVersion}`);
                     // await validateIncomingPackageVersion(incomingTag, latestVersion);
                     // console.log(`Project ${tagPrefix} - ✅ New incoming git tag is valid and not regressing. Triggering release to NuGet Gallery command...\n`);
+
+                    console.log(`Project ${tagPrefix} - calling release script with args: ${csproj} ${incomingVersion}`);
 
                     await runReleaseScript(csproj, incomingVersion); // throws if publish fails
 

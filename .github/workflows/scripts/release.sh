@@ -35,13 +35,15 @@ dotnet pack "$CSPROJ" \
   --no-build \
   /p:Version="$VERSION"
 
-echo "🚀  Publishing NuGet packages…"
-shopt -s nullglob
-PKGS=("$NUGET_OUTPUT"/*.nupkg)
-if [ ${#PKGS[@]} -eq 0 ]; then
-  echo "❌  No packages found in $NUGET_OUTPUT" >&2
-  exit 1
-fi
+
+echo "🚀  Publishing NuGet package…"
+dotnet nuget push "$NUGET_OUTPUT"/*.nupkg \
+  --api-key "$API_KEY" \
+  --source "$SOURCE_URL"
+
+# Cleanup
+rm -f "$NUGET_OUTPUT"/*.nupkg
+
 
 #for pkg in "${PKGS[@]}"; do
 #  echo "    → $(basename "$pkg")"
