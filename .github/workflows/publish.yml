@@ -40,5 +40,8 @@ jobs:
         with:
           node-version: '20'
 
+      - name: Make release script executable
+        run:  chmod +x .github/workflows/scripts/release.sh
+
       - name: Run Pack & Publish Script
         run:  node .github/workflows/scripts/release-workflow.js
