@@ -13,16 +13,15 @@ permissions:
 
 on:
   workflow_dispatch: # Allow running the workflow manually from the GitHub UI
-  push:
-  #tags: ['Model/v*', 'Profile/v*', 'Serializer/*']
-
-#    branches:
-#      - main # build & pack on every push to main
-
+  push: # Run on every push to any branch
+  #pull_request:
+  #  types: [ opened ]
+  #  branches: [ main ]
 
 jobs:
-  build_pack:
+  build_pack_publish:
     runs-on: ubuntu-latest
+    #if: startsWith(github.head_ref, 'release-') || github.event_name == 'workflow_dispatch' # Run only on release branch or manual run
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -34,58 +33,10 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-
-
-      - name: Install dotnet-affected tool
-        run:  dotnet tool install --global dotnet-affected
-
-
-      - name: Create tool manifest
-        run:  |
-              dotnet new tool-manifest --force
-              dotnet tool install dotnet-affected
-
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run:  echo "$GITHUB_CONTEXT"
-
-
-      - name: Determine build scope
-        uses: leonardochaia/dotnet-affected-action@v1
-        id:   dotnet_affected
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          from: ${{ github.event.before }}
-          #from: 'c4ac74acdfc24bcdf7aa9c444acf4554e49de5ec'
-          to:   ${{ github.event.after }}
+          node-version: '20'
 
-
-      # 🔍 DEBUG STEP - Log all outputs
-      - name: Dump dotnet-affected outputs
-        env:
-          OUTPUTS: ${{ toJson(steps.dotnet_affected.outputs) }}
-        run:  echo "$OUTPUTS"
-
-
-      - name: Debug – list workspace
-        run:  |
-              echo "📂 Repo root is $PWD"
-              ls -alh
-              echo
-              echo "🔍 Top-level tree (two levels deep)"
-              sudo apt-get -qq update && sudo apt-get -qq install tree   # optional
-              tree -a -L 3 || true
-              
-              echo
-              echo "🧬 Environment snapshot"
-              printenv | sort
-
-
-      - name: Process affected projects
-        if:   steps.dotnet_affected.outputs.affected != ''
-        env:
-          AFFECTED: ${{ steps.dotnet_affected.outputs.affected }}
-        run:  |
-              printf '%s' "$AFFECTED" | sed '/^$/d' > affected.txt
-              .github/workflows/scripts/process_affected.sh affected.txt
-
+      - name: Run Pack & Publish Script
+        run:  node .github/workflows/scripts/release-workflow.js
