@@ -87,7 +87,7 @@ namespace OpenTripModel.v5
         /// <summary>
         /// 
         /// </summary>
-        public TimeFormat TimeFormat { get; set; }
+        public TimeFormat? TimeFormat { get; set; }
 
 
 
