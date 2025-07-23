@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace OpenTripModel.Validation
 {
@@ -17,12 +18,35 @@ namespace OpenTripModel.Validation
                 this.Messages.AddRange(validationMessages);
         }
 
+        public override string ToString()
+        {
+            if (IsValid)
+                return "Validation succeeded (0 errors)";
+
+            // Headline
+            var sb = new StringBuilder()
+                .AppendLine($"Validation failed ({Messages.Count} issues):");
+
+            // Sort, then format
+            foreach (var msg in Messages.OrderBy(m => m.Severity)/*.ThenBy(m => m.Path)*/)
+            {
+                sb.Append("[")
+                    .Append(msg.Severity)
+                    .Append("] ")
+                    .Append(msg.Path)
+                    .Append(" → ")
+                    .AppendLine(msg.Message);
+            }
+
+            return sb.ToString().TrimEnd();
+        }
+
 
 
         /// <summary>
         /// Gets whether the validation is considered successful (no errors).
         /// </summary>
-        public System.Boolean IsValid => !this.Messages.Any(m => m.Severity == Severity.Error);
+        public bool IsValid => this.Messages.All(m => m.Severity != Severity.Error);
 
 
 
@@ -37,7 +61,7 @@ namespace OpenTripModel.Validation
 
 
 
-        public static ValidationResult Failure(System.String message ) =>
-            new ValidationResult( new ValidationMessage() { Severity = Severity.Error, Message = message } );
+        public static ValidationResult Failure(string message ) =>
+            new( new ValidationMessage { Severity = Severity.Error, Message = message } );
     }
 }
