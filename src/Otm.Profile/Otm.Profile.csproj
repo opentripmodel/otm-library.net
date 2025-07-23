@@ -1,13 +1,37 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
-    <Authors>FiLogic B.V.</Authors>
-    <Company>Stichting Uniforme Transport Code</Company>
-    <Description>OTM Toolkit - A cross-framework .NET library</Description>
-    <Title>OTM Toolkit</Title>
-    <ReleaseVersion>1.1.1.8-SNAPSHOT</ReleaseVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Otm.Model\Otm.Model.csproj" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
+        <LangVersion>11.0</LangVersion>
+        <Authors>FiLogic B.V.</Authors>
+        <Company>Stichting Uniforme Transport Code</Company>
+        <Description>OTM Toolkit - A cross-framework .NET library</Description>
+        <Title>OTM Toolkit</Title>
+        <ReleaseVersion>1.1.1.8-SNAPSHOT</ReleaseVersion>
+        <PackageId>Otm.Profile</PackageId>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DebugType>full</DebugType>
+        <DebugSymbols>true</DebugSymbols>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Otm.Model\Otm.Model.csproj"/>
+        <ProjectReference Include="..\Otm.Serializer\Otm.Serializer.csproj"/>
+    </ItemGroup>
+      <ItemGroup>
+        <Folder Include="Profiles\CBS\Schema\" />
+      </ItemGroup>
+
+    <!-- Open-source CBS Schema Reference-->
+    <ItemGroup>
+        <EmbeddedResource Include="Profiles/CBS/Schema/schema"/>
+    </ItemGroup>
+    <ItemGroup>
+      <PackageReference Include="JsonSchema.Net" Version="7.3.4" />
+      <PackageReference Include="Yaml2JsonNode" Version="2.2.0" />
+      <PackageReference Include="YamlDotNet" Version="16.3.0" />
+    </ItemGroup>
+
+    
 </Project>

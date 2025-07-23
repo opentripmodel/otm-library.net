@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
-    <Authors>FiLogic B.V.</Authors>
-    <Company>Stichting Uniforme Transport Code</Company>
-    <Description>OTM Toolkit - A cross-framework .NET library</Description>
-    <PackageId>Otm.Profile</PackageId>
-    <Title>OTM Toolkit</Title>
-    <ReleaseVersion>1.1.1.2-SNAPSHOT</ReleaseVersion>
-  </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="System.Text.Json" Version="9.0.5" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Otm.Model\Otm.Model.csproj" />
-  </ItemGroup>
+    <PropertyGroup>
+        <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
+        <LangVersion>11.0</LangVersion>
+        <Authors>FiLogic B.V.</Authors>
+        <Company>Stichting Uniforme Transport Code</Company>
+        <Description>OTM Toolkit - A cross-framework .NET library</Description>
+        <Title>OTM Toolkit</Title>
+        <ReleaseVersion>1.1.1.2-SNAPSHOT</ReleaseVersion>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="System.Text.Json" Version="9.0.5"/>
+    </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Otm.Model\Otm.Model.csproj"/>
+    </ItemGroup>
 </Project>
