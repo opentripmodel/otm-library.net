@@ -15,7 +15,7 @@ namespace OpenTripModel.v5
         /// Describes a geographic reference, this is the primary way to link a 
         /// Location entity to a physical, geographic location.
         /// </summary>
-        public AddressGeoReference GeoReference { get; set; }
+        public GeoReference GeoReference { get; set; }
 
 
         /// <summary>
