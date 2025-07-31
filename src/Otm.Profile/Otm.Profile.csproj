@@ -6,7 +6,7 @@
         <Company>Stichting Uniforme Transport Code</Company>
         <Description>OTM Toolkit - A cross-framework .NET library</Description>
         <Title>OTM Toolkit</Title>
-        <ReleaseVersion>5.7.0.0</ReleaseVersion>
+        <ReleaseVersion>5.7.0.1-SNAPSHOT</ReleaseVersion>
         <PackageId>Otm.Profile</PackageId>
     </PropertyGroup>
 
