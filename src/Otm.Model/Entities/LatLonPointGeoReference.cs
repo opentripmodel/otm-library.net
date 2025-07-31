@@ -40,6 +40,6 @@
         /// <summary>
         /// Denotes how the bearing is measured.
         /// </summary>
-        public BearingType BearingType { get; set; }
+        public BearingType? BearingType { get; set; }
     }
 }

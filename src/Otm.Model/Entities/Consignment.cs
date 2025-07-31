@@ -16,7 +16,7 @@ namespace OpenTripModel.v5
         /// <summary>
         /// Whether this consignment is requested, accepted, modified or cancelled.
         /// </summary>
-        public ConsignmentStatus Status { get; set; }
+        public ConsignmentStatus? Status { get; set; }
 
 
         /// <summary>

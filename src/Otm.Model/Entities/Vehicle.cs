@@ -19,7 +19,7 @@ namespace OpenTripModel.v5
         /// trailer, you may choose not-applicable. For trailers with cooling capabilities, choose the 
         /// fuel type of the cooling engine.
         /// </summary>
-        public Fuel Fuel { get; set; }
+        public Fuel? Fuel { get; set; }
 
         
         
@@ -42,7 +42,7 @@ namespace OpenTripModel.v5
         /// the European Union and EEA member states. The standards are defined in a series of European Union directives 
         /// staging the progressive introduction of increasingly stringent standards.
         /// </summary>
-        public EmissionStandard EmissionStandard { get; set; }
+        public EmissionStandard? EmissionStandard { get; set; }
 
 
 
@@ -88,7 +88,7 @@ namespace OpenTripModel.v5
         /// <summary>
         /// The license plate of the vehicle.
         /// </summary>
-        public System.String LicencePlate { get; set; }
+        public System.String LicensePlate { get; set; }
 
 
 

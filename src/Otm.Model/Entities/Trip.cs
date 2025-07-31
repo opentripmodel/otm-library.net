@@ -19,6 +19,8 @@ namespace OpenTripModel.v5
         public TransportMode? TransportMode { get; set; }
 
 
+        public EntityType? EntityType { get; set; }
+
 
         /// <summary>
         /// The Vehicle that is driving this trip.

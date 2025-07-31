@@ -3,7 +3,9 @@
 using OpenTripModel.v5;
 using OpenTripModel.Serialization;
 
+using OpenTripModel.Examples;
 
+using Action = System.Action;
 
 // Create a sample Trip object
 var trip = new Trip
@@ -35,3 +37,23 @@ using (var fs = File.OpenRead(path))
     var tripFromStream = serializer.DeserializeFromStream<Trip>(fs);
     Console.WriteLine($"\nDeserialized from stream: Trip Name = {tripFromStream.Name}");
 }
+
+
+var registry = new Dictionary<string, Action>
+{
+    ["ActionsExample"] = TripErrorsExample.Run,
+    ["VehicleExample"] = TripVehicleExample.Run,
+    ["ActorsExample"] = TripActorsExample.Run
+};
+
+
+if (args.Length == 0 || !registry.TryGetValue(args[0], out var run))
+{
+    Console.WriteLine("Usage: dotnet run -- <ExampleName>");
+    Console.WriteLine("Available examples:");
+    foreach (var key in registry.Keys) Console.WriteLine($"  • {key}");
+    return;
+}
+
+run();
+

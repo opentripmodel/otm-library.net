@@ -8,7 +8,7 @@ namespace OpenTripModel.v5
         /// <summary>
         /// The type of location
         /// </summary>
-        public LocationType Type { get; set; }
+        public LocationType? Type { get; set; }
 
 
         /// <summary>

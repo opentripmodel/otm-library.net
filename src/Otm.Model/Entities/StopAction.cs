@@ -9,6 +9,6 @@
         /// <summary>
         /// The sequence NR of this stop within the trip it is taking place.
         /// </summary>
-        public System.Int64 SequenceNr { get; set; }
+        public int? SequenceNr { get; set; }
     }
 }
