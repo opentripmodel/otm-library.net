@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Json.Schema;
 using OpenTripModel.Validation;
 
 namespace OpenTripModel.Profile.Internal;
@@ -28,9 +29,27 @@ internal static class ValidationMessageResolver
                     .Replace(TextResources.JsonSchemaTokens.ButShouldBeConnector, TextResources.UserFriendlyOverrides.ExpectedConnector)
         };
 
-    public static string GetMessage(ValidationCode code, string raw, string path)
+    public static string GetMessage(JsonSchema rootSchema, EvaluationResults errorNode, ValidationCode code, string raw, string path)
     {
+        if (code == ValidationCode.Enum)
+            return BuildEnumMessage(rootSchema, errorNode);
+
         return Map.TryGetValue(code, out var formatter) ? formatter(raw, path) : raw;
+    }
+
+
+    private static string BuildEnumMessage(
+        JsonSchema rootSchema,
+        EvaluationResults errorNode
+    )
+    {
+        const string baseText = TextResources.UserFriendlyOverrides.EnumMessage;
+
+        var allowed = JsonSchemaEnumValues.Get(rootSchema, errorNode.SchemaLocation.Fragment.TrimStart('#'));
+
+        return allowed.Count == 0
+            ? baseText
+            : $"{baseText}: {string.Join(", ", allowed)}";
     }
 
 }

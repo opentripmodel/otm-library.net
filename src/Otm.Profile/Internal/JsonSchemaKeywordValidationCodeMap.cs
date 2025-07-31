@@ -23,7 +23,7 @@ internal static class JsonSchemaKeywordValidationCodeMap
         if (string.IsNullOrWhiteSpace(keyword))
             return ValidationCode.AdditionalProperties;
 
-        return Map.TryGetValue(keyword, out var value) ? value : ValidationCode.GenericError;
+        return Map.GetValueOrDefault(keyword, ValidationCode.GenericError);
     }
 
 }

@@ -8,7 +8,7 @@ namespace OpenTripModel.Profiles.CBS;
 
 internal static class CbsProfileEvaluationResultsMapper
 {
-    public static ValidationResult Map(EvaluationResults root)
+    public static ValidationResult Map(JsonSchema schema, EvaluationResults root)
     {
         // Collect error messages from tree
         var messages = new List<ValidationMessage>();
@@ -26,7 +26,7 @@ internal static class CbsProfileEvaluationResultsMapper
 
                 var instance = errorNode.InstanceLocation.ToString();
 
-                var text = ValidationMessageResolver.GetMessage(code, keywordErrorMap.Value, instance);
+                var text = ValidationMessageResolver.GetMessage(schema, errorNode, code, keywordErrorMap.Value, instance);
 
                 messages.Add(new ValidationMessage
                 {
@@ -41,6 +41,5 @@ internal static class CbsProfileEvaluationResultsMapper
 
         return new ValidationResult(messages.ToArray());
     }
-
 
 }

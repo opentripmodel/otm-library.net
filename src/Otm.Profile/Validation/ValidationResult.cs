@@ -27,10 +27,9 @@ namespace OpenTripModel.Validation
             var sb = new StringBuilder()
                 .AppendLine($"Validation failed ({Messages.Count} issues):");
 
-            // Sort, then format
-            foreach (var msg in Messages.OrderBy(m => m.Severity)/*.ThenBy(m => m.Path)*/)
+            foreach (var msg in Messages.OrderBy(m => m.Severity))
             {
-                sb.Append("[")
+                sb.Append('[')
                     .Append(msg.Severity)
                     .Append("] ")
                     .Append(msg.Path)
