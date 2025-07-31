@@ -12,7 +12,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Otm.Model\Otm.Model.csproj"/>
         <ProjectReference Include="..\Otm.Profile\Otm.Profile.csproj"/>
         <ProjectReference Include="..\Otm.Serializer\Otm.Serializer.csproj"/>
     </ItemGroup>

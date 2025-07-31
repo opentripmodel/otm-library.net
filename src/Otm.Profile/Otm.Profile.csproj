@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
-        <TargetFrameworks>netstandard2.0;net462;net8.0</TargetFrameworks>
+        <TargetFramework>net8.0</TargetFramework>
         <LangVersion>11.0</LangVersion>
         <Authors>FiLogic B.V.</Authors>
         <Company>Stichting Uniforme Transport Code</Company>
@@ -16,7 +16,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Otm.Model\Otm.Model.csproj"/>
+        <ProjectReference Include="..\Otm.Model\Otm.Model.csproj" PrivateAssets="all"/>
         <ProjectReference Include="..\Otm.Serializer\Otm.Serializer.csproj"/>
     </ItemGroup>
       <ItemGroup>
@@ -29,6 +29,7 @@
     </ItemGroup>
     <ItemGroup>
       <PackageReference Include="JsonSchema.Net" Version="7.3.4" />
+      <PackageReference Include="NJsonSchema" Version="11.3.2" />
       <PackageReference Include="Yaml2JsonNode" Version="2.2.0" />
       <PackageReference Include="YamlDotNet" Version="16.3.0" />
     </ItemGroup>

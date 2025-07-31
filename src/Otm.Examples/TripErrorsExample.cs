@@ -18,13 +18,13 @@ public static class TripErrorsExample
 
             Vehicle = new InlineAssociationType<Vehicle>
             {
-                Entity = new Vehicle
-                {
-                    Id = Guid.NewGuid(),
-                    // LicensePlate = "NL-01-AB",
-                    VehicleType = "truck",
-                    AverageFuelConsumption = UnitWithValue.Create(32.5, "l/100km"),
-                }
+                // Entity = new Vehicle
+                // {
+                //     Id = Guid.NewGuid(),
+                //     // LicensePlate = "NL-01-AB",
+                //     VehicleType = "truck",
+                //     AverageFuelConsumption = UnitWithValue.Create(32.5, "l/100km"),
+                // }
             },
 
             Actors =
@@ -111,9 +111,17 @@ public static class TripErrorsExample
 
         trip.Actions[0].Entity.StartTime = DateTime.UtcNow.AddMinutes(5);
 
-        trip.Actors[0].Entity.Locations[0].Entity.GeoReference.Street = "Prinsengracht";
-        trip.Actors[0].Entity.Locations[0].Entity.GeoReference.HouseNumber = "263";
-        trip.Actors[0].Entity.Locations[0].Entity.GeoReference.City = "Amsterdam";
-        trip.Actors[0].Entity.Locations[0].Entity.GeoReference.Country = "NL";
+
+        var geoRef = trip.Actors[0].Entity.Locations[0].Entity.GeoReference;
+
+        if (geoRef is AddressGeoReference address)
+        {
+            address.Street = "Prinsengracht";
+            address.HouseNumber = "263";
+            address.City = "Amsterdam";
+            address.Country = "NL";
+        }
+
+
     }
 }
