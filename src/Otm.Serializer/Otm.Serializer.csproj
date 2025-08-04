@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
         <LangVersion>11.0</LangVersion>
@@ -6,7 +6,7 @@
         <Company>Stichting Uniforme Transport Code</Company>
         <Description>OTM Toolkit - A cross-framework .NET library</Description>
         <Title>OTM Toolkit</Title>
-        <ReleaseVersion>5.7.1.1-SNAPSHOT</ReleaseVersion>
+        <ReleaseVersion>5.7.1.1</ReleaseVersion>
     </PropertyGroup>
     <ItemGroup>
         <PackageReference Include="System.Text.Json" Version="9.0.5"/>
