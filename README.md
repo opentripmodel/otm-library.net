@@ -1,7 +1,7 @@
 # OTM .NET Toolkit
 
 OpenTripModel .NET provides concise OTM types and utilities for C#, helping teams standardize message flows with
-partners that agree on OTM profiles.
+partners who agree on OTM profiles.
 
 **Define how your data translates to OTM** using lightweight model types, **validate** to catch missing or invalid
 profile-required fields, and **publish** via your existing transport stack (request/response APIs, file-based transfers,
@@ -109,7 +109,7 @@ var validator = new CbsProfileValidator(); // choose the desired profile (CBS / 
 var result = validator.Validate(trip);
 
 // Investigate validation errors
-Console.WriteLine(validationResult.ToString());
+Console.WriteLine(result.ToString());
 
 // After reviewing validation result, fix any reported issues within your message structure
 ```
@@ -135,8 +135,8 @@ var json = otmSerializer.Serialize(trip);
 
 ## 📌 Versioning
 
-We use a form of Semantic Versioning (SemVer) with the change being that we incorporate the OTM schema version as the
-first two digits of the release:
+We use a variant of Semantic Versioning (SemVer) that incorporates the OTM schema version as the
+first two segments of the version:
 
 ```txt
 OTM-MAJOR.OTM-MINOR.FEATURE.PATCH
