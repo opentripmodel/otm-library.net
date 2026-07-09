@@ -3,6 +3,8 @@
     public enum EventType
     {
         UpdateEvent,
-        LocationUpdateEvent
+        LocationUpdateEvent,
+        EnergyConsumptionEvent,
+        EmissionEvent
     }
 }

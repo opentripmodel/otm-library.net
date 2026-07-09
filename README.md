@@ -105,7 +105,7 @@ pass/fail with reasons):
 ```cs
 using OpenTripModel.Profiles.CBS;
 
-var validator = new CbsProfileValidator(); // choose the desired profile (CBS / TransportOrder / other)
+var validator = new CbsProfileValidator(); // choose the desired profile (CBS / TransportOrder / CarbonFootprint / other)
 var result = validator.Validate(trip);
 
 // Investigate validation errors
@@ -113,6 +113,19 @@ Console.WriteLine(result.ToString());
 
 // After reviewing validation result, fix any reported issues within your message structure
 ```
+
+Available profile validators:
+
+| Validator                               | Profile                                                                                                           |
+|:----------------------------------------|:------------------------------------------------------------------------------------------------------------------|
+| `CbsProfileValidator`                   | [CBS wegvervoer statistiek](https://www.opentripmodel.org/docs/profiles/cbs_wegvervoer)                            |
+| `TransportOrderProfileValidator`        | [Transport order](https://www.opentripmodel.org/docs/profiles/transport_order)                                     |
+| `CarbonFootprintInputProfileValidator`  | [Carbon Footprint](https://www.opentripmodel.org/docs/profiles/carbon-footprint) – CO₂ calculation input (DRAFT)   |
+| `CarbonFootprintResultProfileValidator` | [Carbon Footprint](https://www.opentripmodel.org/docs/profiles/carbon-footprint) – CO₂ calculation result (DRAFT)  |
+
+For the CO₂ profiles, see [doc/carbon-footprint-profile.md](doc/carbon-footprint-profile.md) for the model additions
+(`EnergyConsumptionEvent`, `EmissionEvent`), the mapping of the DALTI "Uniforme kernset CO₂e" onto OTM, and runnable
+examples.
 
 ### Serialize & publish
 
