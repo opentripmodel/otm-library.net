@@ -10,20 +10,20 @@ public class EventSerializationTests
     private readonly OtmSerializer _serializer = new();
 
     [Fact]
-    public void EnergyConsumptionEvent_InContextEvents_RoundTrips()
+    public void FuelConsumedEvent_InContextEvents_RoundTrips()
     {
         var trip = TestTripFactory.ValidInputTrip();
 
         var json = _serializer.Serialize(trip);
         var deserialized = _serializer.Deserialize<Trip>(json);
 
-        var energyEvent = Assert.IsType<EnergyConsumptionEvent>(Assert.Single(deserialized.ContextEvents));
-        Assert.Equal(Fuel.Diesel, energyEvent.EnergySource);
-        Assert.Equal(23.4, energyEvent.Quantity.Value);
-        Assert.Equal("l", energyEvent.Quantity.Unit);
-        Assert.Equal("CO2emissiefactoren.nl", energyEvent.EmissionFactorStandard);
-        Assert.NotNull(energyEvent.PeriodStart);
-        Assert.NotNull(energyEvent.PeriodEnd);
+        var fuelEvent = Assert.IsType<FuelConsumedEvent>(Assert.Single(deserialized.ContextEvents));
+        Assert.Equal(Fuel.Diesel, fuelEvent.Fuel);
+        Assert.Equal(23.4, fuelEvent.Amount.Value);
+        Assert.Equal("l", fuelEvent.Amount.Unit);
+        Assert.Equal("CO2emissiefactoren.nl", fuelEvent.EmissionFactorStandard);
+        Assert.NotNull(fuelEvent.PeriodStart);
+        Assert.NotNull(fuelEvent.PeriodEnd);
     }
 
     [Fact]
@@ -35,8 +35,8 @@ public class EventSerializationTests
         var deserialized = _serializer.Deserialize<Trip>(json);
 
         var emissionEvent = Assert.IsType<EmissionEvent>(Assert.Single(deserialized.ContextEvents));
-        Assert.Equal(75.2, emissionEvent.TotalEmission.Value);
-        Assert.Equal("kgCO2e", emissionEvent.TotalEmission.Unit);
+        Assert.Equal(75.2, emissionEvent.Amount.Value);
+        Assert.Equal("kgCO2e", emissionEvent.Amount.Unit);
         Assert.Equal("GLEC 3.1", emissionEvent.CalculationMethod.Framework);
         Assert.Equal(DistanceAllocationMethod.Sfd, emissionEvent.CalculationMethod.DistanceAllocationMethod);
         Assert.Equal(2, emissionEvent.CalculationMethod.DataTypeDistribution.Count);
@@ -49,7 +49,7 @@ public class EventSerializationTests
 
         var json = _serializer.Serialize(trip);
 
-        Assert.Contains("\"eventType\": \"energyConsumptionEvent\"", json);
+        Assert.Contains("\"eventType\": \"fuelConsumedEvent\"", json);
     }
 
     [Fact]

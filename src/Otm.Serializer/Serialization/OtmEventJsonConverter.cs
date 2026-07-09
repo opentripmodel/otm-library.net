@@ -51,7 +51,7 @@ namespace OpenTripModel.Serialization
             switch (eventType)
             {
                 case "locationUpdateEvent":     return typeof(LocationUpdateEvent);
-                case "energyConsumptionEvent":  return typeof(EnergyConsumptionEvent);
+                case "fuelConsumedEvent":       return typeof(FuelConsumedEvent);
                 case "emissionEvent":           return typeof(EmissionEvent);
                 default:                        return null;
             }

@@ -44,7 +44,7 @@ public static class CarbonFootprintResultExample
                 {
                     Id = Guid.NewGuid(),
                     Lifecycle = Lifecycle.Realized,
-                    TotalEmission = UnitWithValue.Create(75.2, "kgCO2e"),
+                    Amount = UnitWithValue.Create(75.2, "kgCO2e"),
                     EmissionIntensity = UnitWithValue.Create(62.1, "gCO2e/tkm"),
                     PeriodStart = new DateTime(2026, 6, 15, 7, 30, 0, DateTimeKind.Utc),
                     PeriodEnd = new DateTime(2026, 6, 15, 9, 45, 0, DateTimeKind.Utc),

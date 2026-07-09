@@ -44,7 +44,7 @@ public class CarbonFootprintInputProfileValidatorTests
     }
 
     [Fact]
-    public void MissingEnergyConsumptionEvent_IsInvalid()
+    public void MissingFuelConsumedEvent_IsInvalid()
     {
         var trip = TestTripFactory.ValidInputTrip();
         trip.ContextEvents = new List<Event>();
@@ -56,17 +56,17 @@ public class CarbonFootprintInputProfileValidatorTests
     }
 
     [Fact]
-    public void EnergyEventWithoutQuantity_IsInvalid()
+    public void FuelConsumedEventWithoutAmount_IsInvalid()
     {
         var trip = TestTripFactory.ValidInputTrip();
-        var energyEvent = TestTripFactory.ValidEnergyConsumptionEvent();
-        energyEvent.Quantity = null;
-        trip.ContextEvents = new List<Event> { energyEvent };
+        var fuelEvent = TestTripFactory.ValidFuelConsumedEvent();
+        fuelEvent.Amount = null;
+        trip.ContextEvents = new List<Event> { fuelEvent };
 
         var result = _validator.Validate(trip);
 
         Assert.False(result.IsValid);
-        Assert.Contains(result.Messages, m => m.Code == ValidationCode.Required && m.Message.Contains("quantity"));
+        Assert.Contains(result.Messages, m => m.Code == ValidationCode.Required && m.Message.Contains("amount"));
     }
 
     [Fact]

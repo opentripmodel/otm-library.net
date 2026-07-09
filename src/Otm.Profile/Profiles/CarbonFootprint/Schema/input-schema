@@ -140,7 +140,7 @@ properties:
         - eventType
       properties:
         eventType:
-          const: energyConsumptionEvent
+          const: fuelConsumedEvent
     items:
       type: object
       required:
@@ -148,9 +148,9 @@ properties:
       if:
         properties:
           eventType:
-            const: energyConsumptionEvent
+            const: fuelConsumedEvent
       then:
-        $ref: '#/$defs/energyConsumptionEvent'
+        $ref: '#/$defs/fuelConsumedEvent'
   constraints:
     type: array
 $defs:
@@ -371,23 +371,23 @@ $defs:
                     properties:
                       actionType:
                         const: unload
-  energyConsumptionEvent:
+  fuelConsumedEvent:
     type: object
     required:
       - eventType
-      - energySource
-      - quantity
+      - fuel
+      - amount
       - emissionFactorStandard
       - periodStart
       - periodEnd
     properties:
       eventType:
-        const: energyConsumptionEvent
+        const: fuelConsumedEvent
       id:
         type: string
       lifecycle:
         type: string
-      energySource:
+      fuel:
         enum:
           - petrol
           - diesel
@@ -398,9 +398,9 @@ $defs:
           - adBlue
           - other
         type: string
-      otherEnergySourceDescription:
+      otherFuelType:
         type: string
-      quantity:
+      amount:
         $ref: '#/$defs/unitWithValue'
       emissionFactorStandard:
         minLength: 1
@@ -410,6 +410,8 @@ $defs:
       periodEnd:
         type: string
       vehicle:
+        type: object
+      consignment:
         type: object
       location:
         type: object

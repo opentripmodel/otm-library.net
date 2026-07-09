@@ -32,17 +32,17 @@ public class CarbonFootprintResultProfileValidatorTests
     }
 
     [Fact]
-    public void MissingTotalEmission_IsInvalid()
+    public void MissingAmount_IsInvalid()
     {
         var trip = TestTripFactory.ValidResultTrip();
         var emissionEvent = TestTripFactory.ValidEmissionEvent();
-        emissionEvent.TotalEmission = null;
+        emissionEvent.Amount = null;
         trip.ContextEvents = new List<Event> { emissionEvent };
 
         var result = _validator.Validate(trip);
 
         Assert.False(result.IsValid);
-        Assert.Contains(result.Messages, m => m.Code == ValidationCode.Required && m.Message.Contains("totalEmission"));
+        Assert.Contains(result.Messages, m => m.Code == ValidationCode.Required && m.Message.Contains("amount"));
     }
 
     [Fact]

@@ -86,7 +86,7 @@ $defs:
     type: object
     required:
       - eventType
-      - totalEmission
+      - amount
       - periodStart
       - periodEnd
       - calculationMethod
@@ -97,8 +97,10 @@ $defs:
         type: string
       lifecycle:
         type: string
-      totalEmission:
+      amount:
         $ref: '#/$defs/unitWithValue'
+      method:
+        type: string
       emissionIntensity:
         $ref: '#/$defs/unitWithValue'
       periodStart:
@@ -158,6 +160,8 @@ $defs:
                   minimum: 0
                   maximum: 1
       vehicle:
+        type: object
+      consignment:
         type: object
       location:
         type: object

@@ -124,7 +124,7 @@ Available profile validators:
 | `CarbonFootprintResultProfileValidator` | [Carbon Footprint](https://www.opentripmodel.org/docs/profiles/carbon-footprint) – CO₂ calculation result (DRAFT)  |
 
 For the CO₂ profiles, see [doc/carbon-footprint-profile.md](doc/carbon-footprint-profile.md) for the model additions
-(`EnergyConsumptionEvent`, `EmissionEvent`), the mapping of the DALTI "Uniforme kernset CO₂e" onto OTM, and runnable
+(`FuelConsumedEvent`, `EmissionEvent`), the mapping of the DALTI "Uniforme kernset CO₂e" onto OTM, and runnable
 examples.
 
 ### Serialize & publish

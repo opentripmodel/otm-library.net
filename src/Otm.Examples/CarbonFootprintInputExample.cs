@@ -163,12 +163,12 @@ public static class CarbonFootprintInputExample
 
             ContextEvents = new List<Event>
             {
-                new EnergyConsumptionEvent
+                new FuelConsumedEvent
                 {
                     Id = Guid.NewGuid(),
                     Lifecycle = Lifecycle.Realized,
-                    EnergySource = Fuel.Diesel,
-                    Quantity = UnitWithValue.Create(23.4, "l"),
+                    Fuel = Fuel.Diesel,
+                    Amount = UnitWithValue.Create(23.4, "l"),
                     EmissionFactorStandard = "CO2emissiefactoren.nl",
                     PeriodStart = new DateTime(2026, 6, 15, 7, 30, 0, DateTimeKind.Utc),
                     PeriodEnd = new DateTime(2026, 6, 15, 9, 45, 0, DateTimeKind.Utc)

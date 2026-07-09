@@ -37,7 +37,7 @@ internal static class TestTripFactory
                 Stop(1, ActionType.Load, "3542 AB"),
                 Stop(2, ActionType.Unload, "3818 LE")
             },
-            ContextEvents = new List<Event> { ValidEnergyConsumptionEvent() }
+            ContextEvents = new List<Event> { ValidFuelConsumedEvent() }
         };
     }
 
@@ -53,13 +53,13 @@ internal static class TestTripFactory
         };
     }
 
-    public static EnergyConsumptionEvent ValidEnergyConsumptionEvent()
+    public static FuelConsumedEvent ValidFuelConsumedEvent()
     {
-        return new EnergyConsumptionEvent
+        return new FuelConsumedEvent
         {
             Id = Guid.NewGuid(),
-            EnergySource = Fuel.Diesel,
-            Quantity = UnitWithValue.Create(23.4, "l"),
+            Fuel = Fuel.Diesel,
+            Amount = UnitWithValue.Create(23.4, "l"),
             EmissionFactorStandard = "CO2emissiefactoren.nl",
             PeriodStart = new DateTime(2026, 6, 15, 7, 30, 0, DateTimeKind.Utc),
             PeriodEnd = new DateTime(2026, 6, 15, 9, 45, 0, DateTimeKind.Utc)
@@ -71,7 +71,7 @@ internal static class TestTripFactory
         return new EmissionEvent
         {
             Id = Guid.NewGuid(),
-            TotalEmission = UnitWithValue.Create(75.2, "kgCO2e"),
+            Amount = UnitWithValue.Create(75.2, "kgCO2e"),
             EmissionIntensity = UnitWithValue.Create(62.1, "gCO2e/tkm"),
             PeriodStart = new DateTime(2026, 6, 15, 7, 30, 0, DateTimeKind.Utc),
             PeriodEnd = new DateTime(2026, 6, 15, 9, 45, 0, DateTimeKind.Utc),

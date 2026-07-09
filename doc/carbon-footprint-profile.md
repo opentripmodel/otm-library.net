@@ -32,12 +32,19 @@ data travel as **context events** on the trip:
 
 | Type | Purpose |
 |---|---|
-| `EnergyConsumptionEvent` | Energy (fuel/electricity/…) consumed by a vehicle, towed unit or hub over a period. Input for the CO₂ calculation. |
+| `FuelConsumedEvent` | Energy (fuel/electricity/…) consumed by a vehicle, towed unit or hub over a period. Input for the CO₂ calculation. |
 | `EmissionEvent` | A calculated CO₂e emission result (total + intensity) with its calculation method. |
 | `EmissionCalculationMethod` | Transparency on the calculation: framework (e.g. GLEC 3.1), ISO reference (e.g. ISO 14083:2023), distance allocation (GCD/SFD), granularity, data classification (bronze…gold+) and the primary/modelled/default data distribution. |
 
 Supporting enums: `EmissionDataType`, `EmissionDataGranularity`, `EmissionDataClassification`,
 `DistanceAllocationMethod`. The existing `Fuel` enum is reused for energy sources.
+
+`FuelConsumedEvent` and `EmissionEvent` follow the event types of the same name in the
+**OTM 5.7 specification** (`eventType` discriminators `fuelConsumedEvent` / `emissionEvent`,
+required `amount`, optional `fuel`/`method` and vehicle/consignment associations). The
+kernset-specific fields that are not (yet) in the core specification — `periodStart`/`periodEnd`,
+`emissionFactorStandard`, `emissionIntensity`, `calculationMethod` and the hub `location`
+association — are Carbon Footprint profile extensions, marked as such in the XML docs.
 
 ## Usage
 
@@ -80,8 +87,8 @@ dotnet run --project src/Otm.Examples -- CarbonFootprintResultExample
 | Modaliteit | `trip.transportMode` (required) |
 | Laaddatum | load stop `startTime` (required) |
 | Laadeenheid (eenheid + aantal) | consignment `goods[]` (`quantity`, `weight`/`grossWeight`) |
-| Energieverbruik (soort, aantal, normering, periode) | `EnergyConsumptionEvent` in `trip.contextEvents` (required) |
-| Hubdata (HOC energieverbruik) | `EnergyConsumptionEvent` with a `location` association |
+| Energieverbruik (soort, aantal, normering, periode) | `FuelConsumedEvent` in `trip.contextEvents` (required) |
+| Hubdata (HOC energieverbruik) | `FuelConsumedEvent` with a `location` association |
 | Afstand (op stopniveau) | not yet in the core model — use `externalAttributes` (see *Known gaps*) |
 | TOC / Transport type (cargo/container) | `externalAttributes` (see *Known gaps*) |
 
@@ -89,7 +96,7 @@ dotnet run --project src/Otm.Examples -- CarbonFootprintResultExample
 
 | Kernset element | OTM mapping |
 |---|---|
-| Totale CO₂ emissie | `EmissionEvent.totalEmission` (required) |
+| Totale CO₂ emissie | `EmissionEvent.amount` (required) |
 | Totale CO₂ emissie-intensiteit | `EmissionEvent.emissionIntensity` |
 | Periode | `EmissionEvent.periodStart` / `periodEnd` (required) |
 | Framework/versie, ISO-versie | `calculationMethod.framework` / `isoReference` (required) |
