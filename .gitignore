@@ -52,4 +52,4 @@ project.fragment.lock.json
 
 *.cache
 
-.sonarqube
+.sonarqubetrip.json
