@@ -1,12 +1,15 @@
-﻿namespace OpenTripModel.v5
+﻿using System.Text.Json.Serialization;
+
+namespace OpenTripModel.v5
 {
     public abstract class UpdateEvent<TEntity>
         : Event
         where TEntity : IUpdateEvent
     {
         /// <summary>
-        /// 
+        ///
         /// </summary>
+        [JsonIgnore]
         public override EventType EventType => EventType.UpdateEvent;
 
 

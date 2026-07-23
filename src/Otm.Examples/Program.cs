@@ -43,7 +43,8 @@ var registry = new Dictionary<string, Action>
 {
     ["ActionsExample"] = TripErrorsExample.Run,
     ["VehicleExample"] = TripVehicleExample.Run,
-    ["ActorsExample"] = TripActorsExample.Run
+    ["ActorsExample"] = TripActorsExample.Run,
+    ["CarbonFootprintInputExample"] = CarbonFootprintInputExample.Run,
 };
 
 

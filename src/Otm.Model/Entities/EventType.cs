@@ -3,6 +3,7 @@
     public enum EventType
     {
         UpdateEvent,
-        LocationUpdateEvent
+        LocationUpdateEvent,
+        FuelConsumedEvent
     }
 }

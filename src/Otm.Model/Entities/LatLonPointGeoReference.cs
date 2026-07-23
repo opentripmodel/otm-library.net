@@ -1,8 +1,17 @@
-﻿namespace OpenTripModel.v5
+﻿using System.Text.Json.Serialization;
+
+namespace OpenTripModel.v5
 {
     public class LatLonPointGeoReference
         : GeoReference
     {
+        /// <summary>
+        /// GeoReference discriminator. Fixed to <see cref="GeoReferenceType.LatLonPointGeoReference"/>.
+        /// Ignored during serialization — the <c>type</c> JSON property is written by the polymorphic
+        /// discriminator declared on <see cref="GeoReference"/>; re-applied here because
+        /// <see cref="JsonIgnoreAttribute"/> does not inherit through property overrides.
+        /// </summary>
+        [JsonIgnore]
         public override GeoReferenceType Type => GeoReferenceType.LatLonPointGeoReference;
 
 

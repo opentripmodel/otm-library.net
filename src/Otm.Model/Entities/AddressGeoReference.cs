@@ -1,8 +1,11 @@
-﻿namespace OpenTripModel.v5
+﻿using System.Text.Json.Serialization;
+
+namespace OpenTripModel.v5
 {
     public class AddressGeoReference
         : GeoReference
     {
+        [JsonIgnore]
         public override GeoReferenceType Type => GeoReferenceType.AddressGeoReference;
 
         /// <summary>

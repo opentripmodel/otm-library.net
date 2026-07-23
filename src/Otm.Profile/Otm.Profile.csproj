@@ -26,6 +26,11 @@
     <ItemGroup>
         <EmbeddedResource Include="Profiles/CBS/Schema/schema"/>
     </ItemGroup>
+
+    <!-- Carbon Footprint (input) Schema Reference -->
+    <ItemGroup>
+        <EmbeddedResource Include="Profiles/CarbonFootprint/Schema/schema"/>
+    </ItemGroup>
     <ItemGroup>
       <PackageReference Include="JsonSchema.Net" Version="7.3.4" />
       <PackageReference Include="NJsonSchema" Version="11.3.2" />

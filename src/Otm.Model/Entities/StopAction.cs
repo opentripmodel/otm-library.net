@@ -3,7 +3,15 @@
     public class StopAction
         : Action
     {
-        public override ActionType ActionType => ActionType.Stop;
+        /// <summary>
+        /// Initializes a new <see cref="StopAction"/> defaulted to <see cref="ActionType.Stop"/>.
+        /// The <see cref="Action.ActionType"/> remains settable so callers can override it where the
+        /// profile permits (e.g. <see cref="ActionType.Move"/> in the Carbon Footprint profile).
+        /// </summary>
+        public StopAction()
+        {
+            ActionType = ActionType.Stop;
+        }
 
 
         /// <summary>

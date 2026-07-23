@@ -104,5 +104,13 @@ namespace OpenTripModel.v5
         /// to duration. The duration follows the ISO 8601 specification
         /// </summary>
         public System.String Duration { get; set; }
+
+
+
+        /// <summary>
+        /// The distance travelled while performing this action, typically set on move actions
+        /// to drive carbon footprint / emission calculations.
+        /// </summary>
+        public UnitWithValue Distance { get; set; }
     }
 }

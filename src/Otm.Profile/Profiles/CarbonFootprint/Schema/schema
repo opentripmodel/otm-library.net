@@ -1,0 +1,423 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: OTM profile - Carbon footprint input version 0.5 (DRAFT)
+description: 'Input message for OTM carbon footprint calculations: a Trip carrying
+  fuelConsumedEvent context events, based on the Semantic Treehouse message model
+  MessageModel_93a275b9-ac20-4294-999a-c7db69605b5a.'
+required:
+- entityType
+- vehicle
+additionalProperties: false
+properties:
+  entityType:
+    enum:
+    - trip
+    type: string
+  id:
+    type: string
+  contextEvents:
+    items:
+      required:
+      - eventType
+      - id
+      - fuel
+      - amount
+      additionalProperties: false
+      properties:
+        eventType:
+          enum:
+          - fuelConsumedEvent
+          type: string
+        id:
+          type: string
+        name:
+          type: string
+        externalAttributes:
+          additionalProperties: true
+          type: object
+        consignment:
+          required:
+          - associationType
+          - entity
+          additionalProperties: false
+          properties:
+            associationType:
+              enum:
+              - inline
+              type: string
+            entity:
+              additionalProperties: false
+              properties:
+                goods:
+                  items:
+                    required:
+                    - associationType
+                    - entity
+                    additionalProperties: false
+                    properties:
+                      associationType:
+                        enum:
+                        - inline
+                        type: string
+                      entity:
+                        required:
+                        - type
+                        additionalProperties: false
+                        properties:
+                          type:
+                            enum:
+                            - items
+                            type: string
+                          weight:
+                            required:
+                            - value
+                            - unit
+                            additionalProperties: false
+                            properties:
+                              value:
+                                type: number
+                              unit:
+                                type: string
+                            type: object
+                        type: object
+                      description:
+                        type: string
+                    type: object
+                  type: array
+              type: object
+            description:
+              type: string
+          type: object
+        fuel:
+          enum:
+          - adBlue
+          - cng
+          - diesel
+          - electricity
+          - hydrogen
+          - lng
+          - other
+          - petrol
+          type: string
+        amount:
+          required:
+          - value
+          - unit
+          additionalProperties: false
+          properties:
+            value:
+              type: number
+            unit:
+              type: string
+          type: object
+      type: object
+    type: array
+  externalAttributes:
+    additionalProperties: true
+    type: object
+  transportMode:
+    enum:
+    - air
+    - inlandWaterway
+    - maritime
+    - rail
+    - road
+    type: string
+  vehicle:
+    required:
+    - associationType
+    - entity
+    additionalProperties: false
+    properties:
+      associationType:
+        enum:
+        - inline
+        type: string
+      entity:
+        required:
+        - licensePlate
+        additionalProperties: false
+        properties:
+          id:
+            type: string
+          vehicleType:
+            type: string
+          averageFuelConsumption:
+            required:
+            - value
+            - unit
+            additionalProperties: false
+            properties:
+              value:
+                type: number
+              unit:
+                type: string
+            type: object
+          licensePlate:
+            type: string
+          emptyWeight:
+            required:
+            - value
+            - unit
+            additionalProperties: false
+            properties:
+              value:
+                type: number
+              unit:
+                type: string
+            type: object
+        type: object
+      description:
+        type: string
+    type: object
+  actors:
+    items:
+      required:
+      - associationType
+      - entity
+      additionalProperties: false
+      properties:
+        associationType:
+          enum:
+          - inline
+          type: string
+        entity:
+          required:
+          - entityType
+          additionalProperties: false
+          properties:
+            entityType:
+              enum:
+              - actor
+              type: string
+            id:
+              type: string
+          type: object
+        description:
+          type: string
+      type: object
+    type: array
+  actions:
+    items:
+      required:
+      - associationType
+      - entity
+      additionalProperties: false
+      properties:
+        associationType:
+          enum:
+          - inline
+          type: string
+        entity:
+          required:
+          - actionType
+          additionalProperties: false
+          properties:
+            actionType:
+              enum:
+              - move
+              - stop
+              type: string
+            distance:
+              required:
+              - value
+              - unit
+              additionalProperties: false
+              properties:
+                value:
+                  type: number
+                unit:
+                  type: string
+              type: object
+            actions:
+              items:
+                required:
+                - associationType
+                - entity
+                additionalProperties: false
+                properties:
+                  associationType:
+                    enum:
+                    - inline
+                    type: string
+                  entity:
+                    required:
+                    - actionType
+                    additionalProperties: false
+                    properties:
+                      actionType:
+                        enum:
+                        - load
+                        - unload
+                        type: string
+                      consignment:
+                        required:
+                        - associationType
+                        - entity
+                        additionalProperties: false
+                        properties:
+                          associationType:
+                            enum:
+                            - inline
+                            type: string
+                          entity:
+                            additionalProperties: false
+                            properties:
+                              id:
+                                type: string
+                              goods:
+                                items:
+                                  required:
+                                  - associationType
+                                  - entity
+                                  additionalProperties: false
+                                  properties:
+                                    associationType:
+                                      enum:
+                                      - inline
+                                      type: string
+                                    entity:
+                                      required:
+                                      - type
+                                      additionalProperties: false
+                                      properties:
+                                        type:
+                                          enum:
+                                          - items
+                                          type: string
+                                        quantity:
+                                          type: integer
+                                        weight:
+                                          required:
+                                          - value
+                                          - unit
+                                          additionalProperties: false
+                                          properties:
+                                            value:
+                                              type: number
+                                            unit:
+                                              type: string
+                                          type: object
+                                        width:
+                                          required:
+                                          - value
+                                          - unit
+                                          additionalProperties: false
+                                          properties:
+                                            value:
+                                              type: number
+                                            unit:
+                                              type: string
+                                          type: object
+                                        height:
+                                          required:
+                                          - value
+                                          - unit
+                                          additionalProperties: false
+                                          properties:
+                                            value:
+                                              type: number
+                                            unit:
+                                              type: string
+                                          type: object
+                                        length:
+                                          required:
+                                          - value
+                                          - unit
+                                          additionalProperties: false
+                                          properties:
+                                            value:
+                                              type: number
+                                            unit:
+                                              type: string
+                                          type: object
+                                      type: object
+                                    description:
+                                      type: string
+                                  type: object
+                                type: array
+                              transportOrder:
+                                required:
+                                - associationType
+                                - entity
+                                additionalProperties: false
+                                properties:
+                                  associationType:
+                                    enum:
+                                    - inline
+                                    type: string
+                                  entity:
+                                    additionalProperties: false
+                                    properties:
+                                      id:
+                                        type: string
+                                    type: object
+                                  description:
+                                    type: string
+                                type: object
+                            type: object
+                          description:
+                            type: string
+                        type: object
+                      location:
+                        required:
+                        - associationType
+                        - entity
+                        additionalProperties: false
+                        properties:
+                          associationType:
+                            enum:
+                            - inline
+                            type: string
+                          entity:
+                            required:
+                            - geoReference
+                            additionalProperties: false
+                            properties:
+                              geoReference:
+                                required:
+                                - type
+                                additionalProperties: false
+                                properties:
+                                  type:
+                                    enum:
+                                    - latLonPointGeoReference
+                                    type: string
+                                  lat:
+                                    type: number
+                                  lon:
+                                    type: number
+                                  street:
+                                    type: string
+                                  houseNumber:
+                                    type: string
+                                  postalCode:
+                                    type: string
+                                  city:
+                                    type: string
+                                  country:
+                                    type: string
+                                type: object
+                            type: object
+                          description:
+                            type: string
+                        type: object
+                      timeFormat:
+                        enum:
+                        - dateTime
+                        - duration
+                        - recurringDateTime
+                        type: string
+                      startTime:
+                        type: string
+                    type: object
+                  description:
+                    type: string
+                type: object
+              type: array
+          type: object
+        description:
+          type: string
+      type: object
+    type: array
+type: object
+$id: /Trip
