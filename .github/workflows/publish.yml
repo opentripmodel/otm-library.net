@@ -48,7 +48,7 @@ jobs:
         uses: NuGet/login@v1
         id: nuget-login
         with:
-          user: filogic # nuget.org organization that owns the Trusted Publishing policy
+          user: marinus_filogic # nuget.org username of the Trusted Publishing policy CREATOR (the org 'filogic' owns the policy, but NuGet/login needs the creator's username)
 
       - name: Run Pack & Publish Script
         run:  node .github/workflows/scripts/release-workflow.js
