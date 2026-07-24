@@ -1,8 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace OpenTripModel.v5
 {
+    // The concrete action subtypes are declared here so that a collection typed to Action (e.g.
+    // Trip.Actions) serializes each element with its own actionType discriminator and its derived
+    // properties. Mirrors the polymorphism setup on GeoReference. No type-discriminator string is
+    // given, so no "$type" is emitted — the actionType property remains the discriminator.
+    [JsonDerivedType(typeof(StopAction))]
+    [JsonDerivedType(typeof(MoveAction))]
     public class Action
         : OtmEntity
     {

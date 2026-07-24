@@ -126,7 +126,9 @@ properties:
     type: array
     minItems: 2
     items:
-      $ref: '#/$defs/stopAssociation'
+      oneOf:
+        - $ref: '#/$defs/stopAssociation'
+        - $ref: '#/$defs/moveAssociation'
     allOf:
       - contains:
           $ref: '#/$defs/stopContainingActionType/load'
@@ -249,6 +251,59 @@ $defs:
             type: array
             items:
               $ref: '#/$defs/nestedActionAssociation'
+  moveAssociation:
+    type: object
+    required:
+      - associationType
+      - entity
+    properties:
+      associationType:
+        enum:
+          - inline
+        type: string
+      description:
+        type: string
+      entity:
+        type: object
+        required:
+          - actionType
+          - from
+          - to
+        properties:
+          id:
+            type: string
+          actionType:
+            enum:
+              - move
+            type: string
+          lifecycle:
+            type: string
+          startTime:
+            type: string
+          endTime:
+            type: string
+          from:
+            $ref: '#/$defs/location'
+          to:
+            $ref: '#/$defs/location'
+          route:
+            type: object
+            required:
+              - entity
+            properties:
+              associationType:
+                enum:
+                  - inline
+                type: string
+              description:
+                type: string
+              entity:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  geoReference:
+                    type: object
   nestedActionAssociation:
     type: object
     required:

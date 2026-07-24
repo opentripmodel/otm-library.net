@@ -35,10 +35,12 @@ namespace OpenTripModel.v5
 
 
         /// <summary>
-        /// All actions that are/were happening on this trip, such as stopping at certain locations and loading and 
-        /// unloading of consignments.
+        /// All actions that are/were happening on this trip, such as stopping at certain locations
+        /// (<see cref="StopAction"/>), driving between them (<see cref="MoveAction"/>) and loading and
+        /// unloading of consignments. Typed to <see cref="Action"/> so the trip can carry a mix of
+        /// action kinds at the top level.
         /// </summary>
-        public List<InlineAssociationType<StopAction>> Actions { get; set; }
+        public List<InlineAssociationType<Action>> Actions { get; set; }
 
 
         /// <summary>
