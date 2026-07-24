@@ -8,7 +8,7 @@ namespace OpenTripModel.v5
         /// <summary>
         /// Geographic representation of this route.
         /// </summary>
-        public LatLonArrayGeoReference GeoReferences { get; set; }
+        public GeoReference GeoReference { get; set; }
 
 
         /// <summary>

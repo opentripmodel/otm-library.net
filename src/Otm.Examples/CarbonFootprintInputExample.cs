@@ -111,7 +111,7 @@ public static class CarbonFootprintInputExample
                 }
             },
 
-            Actions = new List<InlineAssociationType<StopAction>>
+            Actions = new List<InlineAssociationType<v5.Action>>
             {
                 new()
                 {

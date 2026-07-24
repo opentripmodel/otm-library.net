@@ -4,12 +4,13 @@ env:
   DOTNET_SKIP_FIRST_TIME_EXPERIENCE: 1
   DOTNET_NOLOGO:                     true
   NUGET_OUTPUT:                      ${{ github.workspace }}/nuget
-  NUGET_APIKEY:                      ${{ secrets.NUGET_APIKEY }} # Access to NuGet Gallery
-  #GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # NUGET_APIKEY is no longer a stored secret. It is issued per-run by NuGet/login
+  # via Trusted Publishing (OIDC) and injected on the publish step below.
 
 permissions:
   contents: write
   packages: write
+  id-token: write # required for NuGet Trusted Publishing (OIDC token exchange)
 
 on:
   workflow_dispatch: # Allow running the workflow manually from the GitHub UI
@@ -43,5 +44,13 @@ jobs:
       - name: Make release script executable
         run:  chmod +x .github/workflows/scripts/release.sh
 
+      - name: NuGet login (OIDC → short-lived API key)
+        uses: NuGet/login@v1
+        id: nuget-login
+        with:
+          user: marinus_filogic # nuget.org username of the Trusted Publishing policy CREATOR (the org 'filogic' owns the policy, but NuGet/login needs the creator's username)
+
       - name: Run Pack & Publish Script
         run:  node .github/workflows/scripts/release-workflow.js
+        env:
+          NUGET_APIKEY: ${{ steps.nuget-login.outputs.NUGET_API_KEY }}
