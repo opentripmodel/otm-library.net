@@ -67,9 +67,9 @@ public static class TripErrorsExample
 
             Actions =
             [
-                new InlineAssociationType<StopAction>
+                new InlineAssociationType<OpenTripModel.v5.Action>
                 {
-                    Entity = new StopAction
+                    Entity = new OpenTripModel.v5.Action
                     {
                         Id = Guid.NewGuid(),
                         ActionType = ActionType.AttachTransportEquipment,

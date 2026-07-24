@@ -32,7 +32,7 @@ internal static class TestTripFactory
             {
                 new() { Entity = new Actor { Id = Guid.NewGuid(), Name = "Retailer B.V." } }
             },
-            Actions = new List<InlineAssociationType<StopAction>>
+            Actions = new List<InlineAssociationType<OpenTripModel.v5.Action>>
             {
                 Stop(1, ActionType.Load, "3542 AB"),
                 Stop(2, ActionType.Unload, "3818 LE")
@@ -91,9 +91,9 @@ internal static class TestTripFactory
         };
     }
 
-    private static InlineAssociationType<StopAction> Stop(int sequenceNr, ActionType nestedActionType, string postalCode)
+    private static InlineAssociationType<OpenTripModel.v5.Action> Stop(int sequenceNr, ActionType nestedActionType, string postalCode)
     {
-        return new InlineAssociationType<StopAction>
+        return new InlineAssociationType<OpenTripModel.v5.Action>
         {
             Entity = new StopAction
             {
